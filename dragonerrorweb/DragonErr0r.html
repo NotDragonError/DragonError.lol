@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DragonError</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Add the favicon -->
+  <link rel="icon" type="image/jpeg" href="dragonerror.jpg">
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      font-family: 'Montserrat', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+    }
+
+    .main-text {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 57px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #role {
+      font-size: 28px;
+      text-align: left;
+      margin: 5px 0;
+      color: black;
+    }
+
+    /* Make "DragonError" text red */
+    .name {
+      color: red;
+    }
+
+    /* Make "ThePizzaGod" text yellow */
+    .pizza-god {
+      color: yellow;
+    }
+
+    /* Position the "Connect with me" text in the left top corner */
+    .connect-with-me {
+      position: absolute;
+      top: 9px;
+      left: 10px;
+      color: black;
+      font-size: 24px; /* Adjust the font size as needed */
+      cursor: pointer;
+    }
+
+    /* Position the social links box */
+    .social-links-box {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 10px;
+      background-color: rgba(56,56,56);
+      padding: 20px;
+      border-radius: 5px;
+      width: 100px; /* Adjust the width as needed */
+    }
+
+    .social-links-box a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin-bottom: 5px;
+      font-size: 19px; /* Adjust the font size of social links */
+    }
+
+    /* On hover, change the color of social links */
+    .social-links-box a:hover {
+      color: red;
+    }
+
+    /* Show the social links box on click */
+    .connect-with-me.active + .social-links-box {
+      display: block;
+    }
+
+    /* Position the subpage link box in the right top corner */
+    .subpage-link {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 20px; /* Set the width and height for square-shaped box */
+      height: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: 3px solid black; /* Add black border and adjust the thickness as needed */
+      background: linear-gradient(90deg, white 50%, black 50%); /* Add gradient for half white and half black background */
+    }
+
+    .subpage-link:hover {
+      background: linear-gradient(90deg, black 50%, white 50%); /* Add gradient for half black and half white background on hover */
+    }
+
+    /* Position the copyright text at the bottom of the page */
+    .copyright {
+      position: absolute;
+      bottom: -5px;
+      right: 10px;
+      color: black;
+      font-size: 12px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="main-text">
+    <h1>YOoo, <span class="name">DragonError</span> here!</h1>
+    <p id="role">Youtuber</p>
+  </div>
+
+  <div class="connect-with-me" onclick="toggleSocialLinks()">Connect with me</div>
+  <div class="social-links-box" id="socialLinksBox">
+    <a href="https://twitter.com/NotDragonError" target="_blank">Twitter</a>
+    <a href="https://www.youtube.com/@itsDragonError" target="_blank">YouTube</a>
+    <a href="https://www.instagram.com/itsnotdragonerr0r/" target="_blank">Instagram</a>
+    <a href="https://discord.gg/Th3zRA9bnw" target="_blank">Discord</a>
+    <a href="https://github.com/NotDragonError" target="_blank">GitHub</a>
+  </div>
+
+  <a href="DragonError.html" class="subpage-link"></a>
+
+  <p class="copyright">&copy; 2023 DragonError</p>
+
+  <script>
+    const roles = ["Youtuber", "Programmer", "An idiot"];
+    let currentRoleIndex = 0;
+    const roleElement = document.getElementById("role");
+    const nameElement = document.querySelector(".name");
+
+    function changeRole() {
+      roleElement.style.opacity = 0; // Fade out
+      setTimeout(() => {
+        roleElement.textContent = roles[currentRoleIndex];
+        roleElement.style.opacity = 1; // Fade in
+        currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+        roleElement.classList.toggle("an-idiot", roles[currentRoleIndex] === "An idiot");
+      }, 300); // Wait for 300ms before fading in
+    }
+
+    function changeColor() {
+      nameElement.style.color = "white";
+      setTimeout(() => {
+        nameElement.style.color = "red";
+      }, 1000);
+    }
+
+    // Change color to black once after 5 seconds
+    setTimeout(() => {
+      let count = 0;
+      const interval = setInterval(() => {
+        nameElement.style.color = count % 2 === 0 ? "white" : "red";
+        count++;
+        if (count > 5) {
+          clearInterval(interval);
+          nameElement.style.color = "red";
+        }
+      }, 1000);
+    }, 5000);
+
+    // Change name to "ThePizzaGod" after 1 minute
+    setTimeout(() => {
+      nameElement.textContent = "ThePizzaGod";
+      nameElement.classList.add("pizza-god");
+      setTimeout(() => {
+        nameElement.textContent = "DragonError";
+        nameElement.classList.remove("pizza-god");
+      }, 5000); // Change back to "DragonError" after 5 seconds
+    }, 60000); // Change to "ThePizzaGod" after 1 minute
+
+    // Start changing role every 2.5 seconds (2500 milliseconds)
+    setInterval(changeRole, 2500);
+
+    // Toggle the social links box visibility
+    function toggleSocialLinks() {
+      const socialLinksBox = document.getElementById("socialLinksBox");
+      document.querySelector(".connect-with-me").classList.toggle("active");
+      socialLinksBox.style.display = socialLinksBox.style.display === "block" ? "none" : "block";
+    }
+  </script>
+</body>
+</html>
